@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Primabad Badmeubel Adviesmodule</title>
+  <meta name="description" content="Primabad badmeubel adviesmodule voor consumenten." />
+  <meta name="theme-color" content="#3e5143" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Primabad Advies" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172025;
+      --muted: #617077;
+      --line: #d9ded9;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --mist: #eef1ec;
+      --leaf: #63745f;
+      --leaf-dark: #3e5143;
+      --copper: #b06f4f;
+      --charcoal: #263038;
+      --focus: rgba(99, 116, 95, 0.22);
+      --shadow: 0 18px 50px rgba(24, 32, 37, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: minmax(300px, 0.92fr) minmax(420px, 1.08fr);
+      gap: clamp(24px, 4vw, 68px);
+      align-items: center;
+      padding: clamp(20px, 5vw, 72px);
+      background:
+        linear-gradient(90deg, rgba(247, 245, 239, 0.98) 0%, rgba(247, 245, 239, 0.86) 47%, rgba(247, 245, 239, 0.1) 100%),
+        url("https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1900&q=82") center right / cover;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--leaf-dark);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--leaf-dark);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      max-width: 760px;
+      font-size: clamp(2.35rem, 6vw, 5.9rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 620px;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--leaf-dark);
+      background: var(--leaf-dark);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.62);
+      color: var(--leaf-dark);
+    }
+
+    .button.install {
+      display: none;
+      background: var(--copper);
+      border-color: var(--copper);
+    }
+
+    .button.install.ready {
+      display: inline-flex;
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 620px;
+    }
+
+    .fact {
+      padding: 14px 15px;
+      border-top: 1px solid rgba(23,32,37,0.14);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .fact b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+    }
+
+    .advisor {
+      width: min(100%, 780px);
+      justify-self: end;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.74);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .advisor-head {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(238, 241, 236, 0.8);
+    }
+
+    .agent {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--charcoal);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .agent strong,
+    .agent span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .agent span {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .reset {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--leaf-dark);
+      font-weight: 900;
+    }
+
+    .chat {
+      height: min(620px, calc(100vh - 220px));
+      min-height: 470px;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 88%;
+      padding: 13px 15px;
+      line-height: 1.48;
+      white-space: pre-line;
+      border: 1px solid transparent;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: var(--mist);
+      border-color: rgba(62, 81, 67, 0.12);
+    }
+
+    .user {
+      align-self: flex-end;
+      background: var(--leaf-dark);
+      color: #fff;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-self: flex-start;
+      max-width: 96%;
+    }
+
+    .chip {
+      border: 1px solid rgba(62, 81, 67, 0.25);
+      background: #fff;
+      color: var(--leaf-dark);
+      padding: 9px 12px;
+      font-weight: 760;
+      transition: transform 150ms ease, border-color 150ms ease;
+    }
+
+    .chip:hover,
+    .button:hover,
+    .reset:hover,
+    .send:hover,
+    .copy:hover {
+      transform: translateY(-1px);
+      border-color: var(--charcoal);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 16px;
+      border-top: 1px solid var(--line);
+      background: rgba(247, 245, 239, 0.9);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+
+    input,
+    select {
+      min-height: 46px;
+      padding: 0 13px;
+    }
+
+    textarea {
+      min-height: 96px;
+      padding: 12px 13px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--leaf-dark);
+      box-shadow: 0 0 0 3px var(--focus);
+    }
+
+    .send {
+      min-width: 52px;
+      min-height: 46px;
+      border: 1px solid var(--leaf-dark);
+      background: var(--leaf-dark);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .section {
+      padding: clamp(34px, 6vw, 76px) clamp(18px, 5vw, 72px);
+      background: #fff;
+    }
+
+    .section.alt {
+      background: var(--mist);
+    }
+
+    .section-head {
+      max-width: 980px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.75rem, 3.3vw, 3.15rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 780px;
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .series-card {
+      display: grid;
+      grid-template-rows: 160px 1fr;
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .series-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .series-body {
+      padding: 15px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .series-title {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .series-title h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      background: var(--mist);
+      color: var(--leaf-dark);
+      font-size: 0.76rem;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .series-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+
+    .specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .spec {
+      padding: 6px 8px;
+      background: #f7f5ef;
+      color: var(--charcoal);
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.86fr) minmax(320px, 1.14fr);
+      gap: clamp(18px, 3vw, 36px);
+      align-items: start;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 18px;
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .lead-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .summary {
+      margin-top: 12px;
+      padding: 13px;
+      background: var(--mist);
+      color: var(--charcoal);
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+
+    .embed-box {
+      display: grid;
+      gap: 12px;
+    }
+
+    .codebox {
+      width: 100%;
+      min-height: 110px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 0.86rem;
+      line-height: 1.45;
+      background: #172025;
+      color: #eef1ec;
+      border-color: #172025;
+    }
+
+    .copy {
+      justify-self: start;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--leaf-dark);
+      background: var(--leaf-dark);
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .sources {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .sources a {
+      color: var(--leaf-dark);
+      font-weight: 800;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .tools {
+        grid-template-columns: 1fr;
+      }
+
+      .advisor {
+        justify-self: stretch;
+      }
+
+      .series-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        font-size: 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 18px 12px 24px;
+        background:
+          linear-gradient(180deg, rgba(247, 245, 239, 0.96), rgba(247, 245, 239, 0.78)),
+          url("https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1100&q=78") center / cover;
+      }
+
+      .brand {
+        font-size: 0.92rem;
+        margin-bottom: 16px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      h1 {
+        font-size: 2.65rem;
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+
+      .lead {
+        font-size: 1.12rem;
+        line-height: 1.55;
+        margin-bottom: 20px;
+      }
+
+      .hero-actions {
+        gap: 9px;
+      }
+
+      .button {
+        min-height: 52px;
+        width: 100%;
+        padding: 0 16px;
+        font-size: 1.02rem;
+      }
+
+      .hero-facts,
+      .series-grid,
+      .two {
+        grid-template-columns: 1fr;
+      }
+
+      .fact {
+        font-size: 1rem;
+        padding: 15px;
+      }
+
+      .advisor {
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .advisor-head {
+        padding: 14px 12px;
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+      }
+
+      .agent strong {
+        font-size: 1.05rem;
+      }
+
+      .agent span {
+        font-size: 0.98rem;
+      }
+
+      .reset {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+      }
+
+      .chat {
+        height: auto;
+        max-height: none;
+        min-height: 520px;
+        padding: 14px 12px;
+        gap: 12px;
+      }
+
+      .input-row {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+
+      .send {
+        width: 100%;
+        min-height: 54px;
+        font-size: 1.2rem;
+      }
+
+      .message {
+        max-width: 96%;
+        padding: 14px 15px;
+        font-size: 1.06rem;
+        line-height: 1.55;
+      }
+
+      .chip {
+        width: 100%;
+        min-height: 50px;
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 1.04rem;
+        line-height: 1.25;
+      }
+
+      input,
+      select {
+        min-height: 54px;
+        font-size: 1.05rem;
+      }
+
+      textarea {
+        font-size: 1.05rem;
+        line-height: 1.45;
+      }
+
+      .section {
+        padding: 34px 14px;
+      }
+
+      h2 {
+        font-size: 2.15rem;
+        line-height: 1.05;
+      }
+
+      .section-head p,
+      .series-card p,
+      .note,
+      .sources {
+        font-size: 1.04rem;
+        line-height: 1.55;
+      }
+
+      .series-card {
+        grid-template-rows: 190px 1fr;
+      }
+
+      .series-title h3 {
+        font-size: 1.22rem;
+      }
+
+      .tag,
+      .spec {
+        font-size: 0.9rem;
+      }
+
+      .panel {
+        padding: 14px;
+      }
+
+      .panel h3 {
+        font-size: 1.32rem;
+      }
+
+      .summary {
+        font-size: 1rem;
+      }
+
+      .codebox {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      .message,
+      .chip,
+      input,
+      select,
+      textarea {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" id="advies">
+      <div>
+        <div class="brand"><span class="brand-mark">P</span> Primabad adviesmodule</div>
+        <h1>Badmeubeladvies dat begint bij de badkamer.</h1>
+        <p class="lead">
+          Een interactieve keuzehulp voor consumenten die Primabad badmeubels vergelijkt op ruimte,
+          stijl, materiaal, opbergruimte en mate van maatwerk. De uitkomst is een duidelijk startadvies
+          voor het gesprek met een Primabad dealer.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#advies">Start advies</a>
+          <a class="button secondary" href="#series">Bekijk series</a>
+          <a class="button secondary" href="#lead">Dealer aanvraag</a>
+          <button class="button install" id="installApp" type="button">Installeer app</button>
+        </div>
+        <div class="hero-facts">
+          <div class="fact"><b>Veel series</b>Van compact Get Up tot maatwerk met Made NL.</div>
+          <div class="fact"><b>Meer dan kleur</b>Advies op diepte, breedte, bladsoort, lades en stijl.</div>
+          <div class="fact"><b>Consumentgericht</b>Heldere taal en praktische vervolgstappen.</div>
+          <div class="fact"><b>Websiteklaar</b>Inclusief formulier en embed-code voor plaatsing.</div>
+        </div>
+      </div>
+
+      <section class="advisor" aria-label="Primabad advieschat">
+        <header class="advisor-head">
+          <div class="agent">
+            <div class="avatar">PB</div>
+            <div>
+              <strong>Primabad badmeubel adviseur</strong>
+              <span>Keuzehulp voor consumenten</span>
+            </div>
+          </div>
+          <button class="reset" id="reset" type="button" aria-label="Gesprek opnieuw starten">↻</button>
+        </header>
+        <div class="chat" id="messages" aria-live="polite"></div>
+        <form class="input-row" id="form">
+          <input id="input" type="text" autocomplete="off" placeholder="Typ je antwoord of kies een knop" />
+          <button class="send" type="submit" aria-label="Verstuur bericht">→</button>
+        </form>
+      </section>
+    </section>
+
+    <section class="section" id="series">
+      <div class="section-head">
+        <h2>Series En Productadvies</h2>
+        <p>
+          De module gebruikt de eigenschappen van meerdere Primabad-series als adviesbasis. Zo krijgt de
+          consument niet alleen een naam, maar ook waarom die serie logisch is.
+        </p>
+      </div>
+      <div class="series-grid" id="seriesGrid"></div>
+    </section>
+
+    <section class="section alt" id="lead">
+      <div class="section-head">
+        <h2>Dealer Aanvraag En Websiteplaatsing</h2>
+        <p>
+          Het formulier maakt van het advies een nette aanvraagtekst. In deze statische versie wordt er
+          niets automatisch verzonden; de consument kan de tekst kopiëren of via e-mail doorzetten.
+        </p>
+      </div>
+      <div class="tools">
+        <div class="panel">
+          <h3>Aanvraag voor dealeradvies</h3>
+          <form class="lead-form" id="leadForm">
+            <div class="two">
+              <input id="name" placeholder="Naam" />
+              <input id="postcode" placeholder="Postcode" />
+            </div>
+            <div class="two">
+              <input id="email" type="email" placeholder="E-mailadres" />
+              <input id="phone" placeholder="Telefoon" />
+            </div>
+            <select id="timeline">
+              <option value="">Wanneer wil je oriënteren?</option>
+              <option>Binnen 1 maand</option>
+              <option>1 tot 3 maanden</option>
+              <option>3 tot 6 maanden</option>
+              <option>Ik ben alleen aan het oriënteren</option>
+            </select>
+            <textarea id="remarks" placeholder="Aanvullende wensen, maten of vragen"></textarea>
+            <button class="button" type="submit">Maak aanvraagtekst</button>
+          </form>
+          <div class="summary" id="leadSummary">Na het advies verschijnt hier een complete aanvraagtekst.</div>
+          <a class="button secondary" id="mailLink" href="#" style="display:none;margin-top:10px;">Open als e-mail</a>
+        </div>
+        <div class="panel embed-box">
+          <h3>Embed op website</h3>
+          <p class="note">
+            Plaats het HTML-bestand op je website en gebruik de iframe-code hieronder op de pagina waar de
+            adviesmodule moet verschijnen. Pas de URL aan naar de definitieve locatie.
+          </p>
+          <textarea class="codebox" id="embedCode" readonly><iframe src="https://jouwdomein.nl/primabad-chatbot.html" title="Primabad badmeubel adviesmodule" width="100%" height="920" style="border:0;max-width:1200px;width:100%;"></iframe></textarea>
+          <button class="copy" id="copyEmbed" type="button">Kopieer embed-code</button>
+          <p class="note" id="copyStatus">Tip: voor echte leadverwerking kan dit formulier later worden gekoppeld aan CRM, e-mail of een dealerlocator.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Bronnen</h2>
+        <p class="sources">
+          Gebaseerd op openbare Primabad-informatie over
+          <a href="https://www.primabad.nl/badkamermeubels/">badkamermeubels</a>,
+          <a href="https://www.primabad.nl/serie/made-nl/">Made NL</a>,
+          <a href="https://www.primabad.nl/serie/get-up/">Get Up</a>,
+          <a href="https://www.primabad.nl/serie/blend/">Blend</a>,
+          <a href="https://www.primabad.nl/serie/coast/">Coast</a>,
+          <a href="https://www.primabad.nl/serie/level/">Level</a>,
+          <a href="https://www.primabad.nl/serie/sunrise/">Sunrise</a>,
+          Nordic, Dawn, Dusk, Ledge, Opbouw en Editions. Definitieve prijs, montage en leverbaarheid altijd via een Primabad dealer controleren.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const messages = document.querySelector("#messages");
+    const form = document.querySelector("#form");
+    const input = document.querySelector("#input");
+    const reset = document.querySelector("#reset");
+    const seriesGrid = document.querySelector("#seriesGrid");
+    const leadForm = document.querySelector("#leadForm");
+    const leadSummary = document.querySelector("#leadSummary");
+    const mailLink = document.querySelector("#mailLink");
+    const copyEmbed = document.querySelector("#copyEmbed");
+    const embedCode = document.querySelector("#embedCode");
+    const copyStatus = document.querySelector("#copyStatus");
+    const installApp = document.querySelector("#installApp");
+    let deferredInstallPrompt = null;
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {});
+      });
+    }
+
+    window.addEventListener("beforeinstallprompt", event => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      installApp.classList.add("ready");
+    });
+
+    installApp.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      installApp.classList.remove("ready");
+    });
+
+    const images = {
+      light: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=900&q=80",
+      warm: "https://images.unsplash.com/photo-1604014238170-4def1e4e6fcf?auto=format&fit=crop&w=900&q=80",
+      compact: "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=900&q=80",
+      dark: "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?auto=format&fit=crop&w=900&q=80",
+      sink: "https://images.unsplash.com/photo-1584546134497-6f1e2edcf7f8?auto=format&fit=crop&w=900&q=80",
+      stone: "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80"
+    };
+
+    const series = [
+      {
+        id: "made",
+        name: "Made NL",
+        tag: "Maatwerk",
+        image: images.stone,
+        specs: ["25-280 cm", "30/40/46/50/54 cm diep", "veel bladopties"],
+        summary: "Voor maximale vrijheid in breedte, diepte, kleur, kastopbouw en wastafelblad.",
+        advice: "Kies Made NL bij lastige maten, brede wanden, dubbele wastafels of wanneer kleur en indeling tot in detail moeten kloppen.",
+        weights: ["maatwerk", "breed", "ruim", "kleur", "solid", "mineraal", "cerablad", "beton", "opbergruimte"]
+      },
+      {
+        id: "getup",
+        name: "Get Up",
+        tag: "Compact",
+        image: images.compact,
+        specs: ["40 cm diep", "keramiek", "8 variaties"],
+        summary: "Compact meubel met luxe uitstraling en verrassend veel opbergruimte.",
+        advice: "Kies Get Up bij kleine badkamers, smalle loopruimte of wanneer 46 cm diepte te fors voelt.",
+        weights: ["klein", "smal", "compact", "toilet", "40", "bewegingsruimte"]
+      },
+      {
+        id: "blend",
+        name: "Blend",
+        tag: "Keramiek",
+        image: images.dark,
+        specs: ["46 cm diep", "keramiek", "10 bladkleuren"],
+        summary: "Robuust keramiek met veel kleurkarakter en een luxe uitstraling.",
+        advice: "Kies Blend als het wastafelblad een blikvanger mag zijn en kleur in keramiek belangrijk is.",
+        weights: ["keramiek", "kleur", "luxe", "hotel", "robuust", "asymmetrisch"]
+      },
+      {
+        id: "coast",
+        name: "Coast",
+        tag: "Stoer",
+        image: images.warm,
+        specs: ["46 cm diep", "keramiek/cerablad/solid/beton", "8 variaties"],
+        summary: "Karaktervol meubel met opvallend blad en veel materiaalkeuze.",
+        advice: "Kies Coast bij een stoere, industriële of uitgesproken badkamer met beton, cerablad of mat solid surface.",
+        weights: ["stoer", "industrieel", "beton", "cerablad", "solid", "karakter", "robuust"]
+      },
+      {
+        id: "level",
+        name: "Level",
+        tag: "Modern",
+        image: images.light,
+        specs: ["46 cm diep", "keramiek", "5 variaties"],
+        summary: "Strak, verfijnd en rustig keramisch blad met moderne details.",
+        advice: "Kies Level voor een moderne, rustige badkamer waarin subtiele luxe belangrijker is dan opvallend contrast.",
+        weights: ["minimalistisch", "rustig", "modern", "keramiek", "verfijnd", "dagelijks"]
+      },
+      {
+        id: "nordic",
+        name: "Nordic",
+        tag: "Scandi",
+        image: images.warm,
+        specs: ["51 cm diep", "keramiek", "8 variaties"],
+        summary: "Scandinavische eenvoud met extra gebruiksgemak door een dieper blad.",
+        advice: "Kies Nordic als je ruimte hebt voor 51 cm diepte en een rustige Scandinavische uitstraling wilt.",
+        weights: ["scandinavisch", "japandi", "warm", "hout", "51", "ruim", "gebruiksgemak"]
+      },
+      {
+        id: "dawn",
+        name: "Dawn",
+        tag: "Comfort",
+        image: images.sink,
+        specs: ["46 cm diep", "keramiek", "5 variaties"],
+        summary: "Royale diepe waskom met dunne, moderne bladlijn.",
+        advice: "Kies Dawn als wascomfort en een ruime, diepe kom prioriteit hebben in dagelijks gebruik.",
+        weights: ["diepe waskom", "comfort", "gezin", "praktisch", "keramiek"]
+      },
+      {
+        id: "dusk",
+        name: "Dusk",
+        tag: "Tijdloos",
+        image: images.light,
+        specs: ["46 cm diep", "keramiek", "8 variaties"],
+        summary: "Dunne bladlijn, fijn geronde waskom en een tijdloze moderne uitstraling.",
+        advice: "Kies Dusk als je een veilig stijlvolle keuze zoekt die in veel badkamers past.",
+        weights: ["tijdloos", "modern", "rustig", "keramiek", "dunne bladlijn"]
+      },
+      {
+        id: "sunrise",
+        name: "Sunrise",
+        tag: "Warm",
+        image: images.warm,
+        specs: ["46 cm diep", "keramiek", "7 variaties"],
+        summary: "Warm modern design met strakke lijnen en zachte afgeronde vormen.",
+        advice: "Kies Sunrise bij houttinten, warme tegels of een badkamer die modern en vriendelijk moet aanvoelen.",
+        weights: ["warm", "hout", "eiken", "japandi", "modern", "zacht", "ronde vormen"]
+      },
+      {
+        id: "ledge",
+        name: "Ledge",
+        tag: "Robuust",
+        image: images.dark,
+        specs: ["46 cm diep", "keramiek", "8 variaties"],
+        summary: "Imposant keramisch blad met rechte hoeken en geronde waskom.",
+        advice: "Kies Ledge als het meubel stevig en stoer mag ogen, maar nog steeds stijlvol moet blijven.",
+        weights: ["stoer", "robuust", "rechte hoeken", "keramiek", "industrieel"]
+      },
+      {
+        id: "opbouw",
+        name: "Opbouw",
+        tag: "Waskom",
+        image: images.sink,
+        specs: ["opbouwkommen", "HPL/solid/cerablad/beton", "veel vormen"],
+        summary: "Voor ronde, vierkante of rechthoekige opbouwkommen in meerdere materialen.",
+        advice: "Kies Opbouw als een losse waskom het stijlstatement mag zijn of als je blad en kom apart wilt combineren.",
+        weights: ["opbouw", "waskom", "marmer", "ronde kom", "design", "persoonlijk"]
+      },
+      {
+        id: "editions",
+        name: "Editions",
+        tag: "Prijsbewust",
+        image: images.compact,
+        specs: ["46 cm diep", "keramiek", "scherpe prijsstelling"],
+        summary: "Third, Fourth, Fifth en Opbouw Edition als heldere designkeuze met scherpe prijsstelling.",
+        advice: "Kies Editions als je een strak designmeubel zoekt met overzichtelijke keuzes en een prijsbewuste instap.",
+        weights: ["prijs", "toegankelijk", "standaard", "eenvoud", "keramiek", "snel"]
+      }
+    ];
+
+    const questions = [
+      { key: "room", text: "Hoe zou je de badkamer omschrijven?", chips: ["Klein of smal", "Gemiddeld", "Ruim", "Toilet of compacte nis"] },
+      { key: "width", text: "Welke breedte past ongeveer?", chips: ["Tot 60 cm", "60-100 cm", "100-140 cm", "140 cm of breder", "Nog niet gemeten"] },
+      { key: "depth", text: "Hoeveel diepte is prettig?", chips: ["Zo ondiep mogelijk", "Rond 46 cm is prima", "51 cm mag ook", "Ik weet het nog niet"] },
+      { key: "style", text: "Welke sfeer wil je bereiken?", chips: ["Rustig minimalistisch", "Hotel chique", "Stoer industrieel", "Warm hout/Japandi", "Kleurrijk persoonlijk"] },
+      { key: "basin", text: "Wat vind je belangrijk aan wastafel of blad?", chips: ["Keramiek praktisch", "Solid surface strak", "Beton of cerablad", "Diepe waskom", "Opbouwkom als blikvanger"] },
+      { key: "storage", text: "Hoeveel opbergruimte wil je?", chips: ["Maximaal opbergen", "Normaal dagelijks gebruik", "Compact houden", "Ook hoge kast of spiegelkast"] },
+      { key: "custom", text: "Hoeveel vrijheid wil je in maat, kleur en indeling?", chips: ["Standaard is prima", "Licht personaliseren", "Veel maatwerk", "Tot op de millimeter passend"] },
+      { key: "budget", text: "Welke richting past bij je budgetgevoel?", chips: ["Prijsbewust", "Middenklasse", "Luxe uitstraling", "Maximale vrijheid"] }
+    ];
+
+    const state = {
+      step: 0,
+      answers: {},
+      lastAdvice: null
+    };
+    let activeChipGroup = null;
+
+    function renderSeriesCards() {
+      seriesGrid.innerHTML = series.map(item => `
+        <article class="series-card">
+          <img src="${item.image}" alt="Badkamerinspiratie voor ${item.name}">
+          <div class="series-body">
+            <div class="series-title">
+              <h3>${item.name}</h3>
+              <span class="tag">${item.tag}</span>
+            </div>
+            <p>${item.summary}</p>
+            <div class="specs">${item.specs.map(spec => `<span class="spec">${spec}</span>`).join("")}</div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function addMessage(text, type = "bot") {
+      const bubble = document.createElement("div");
+      bubble.className = `message ${type}`;
+      bubble.textContent = text;
+      messages.appendChild(bubble);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function clearChips() {
+      if (activeChipGroup) {
+        activeChipGroup.remove();
+        activeChipGroup = null;
+      }
+    }
+
+    function addChips(options, callback = handleAnswer) {
+      clearChips();
+      const wrap = document.createElement("div");
+      wrap.className = "chips";
+      options.forEach(option => {
+        const button = document.createElement("button");
+        button.className = "chip";
+        button.type = "button";
+        button.textContent = option;
+        button.addEventListener("click", () => callback(option));
+        wrap.appendChild(button);
+      });
+      activeChipGroup = wrap;
+      messages.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function askCurrentQuestion() {
+      const question = questions[state.step];
+      if (!question) {
+        showAdvice();
+        return;
+      }
+      addMessage(question.text);
+      addChips(question.chips);
+    }
+
+    function handleAnswer(answer) {
+      const question = questions[state.step];
+      if (!question) return;
+      clearChips();
+      state.answers[question.key] = answer.trim();
+      addMessage(answer, "user");
+      state.step += 1;
+      setTimeout(askCurrentQuestion, 240);
+    }
+
+    function answerText() {
+      return Object.values(state.answers).join(" ").toLowerCase();
+    }
+
+    function rankSeries() {
+      const text = answerText();
+      const scores = series.map(item => {
+        let score = 0;
+        item.weights.forEach(word => {
+          if (text.includes(word)) score += 3;
+        });
+
+        if (/klein|smal|toilet|compact|tot 60|ondiep/.test(text) && item.id === "getup") score += 8;
+        if (/140|breder|ruim|maximale vrijheid|veel maatwerk/.test(text) && item.id === "made") score += 9;
+        if (/millimeter|tot op de millimeter passend/.test(text) && item.id === "made") score += 18;
+        if (/hotel chique|luxe/.test(text) && ["blend", "level", "coast"].includes(item.id)) score += 4;
+        if (/warm hout|japandi|eiken/.test(text) && ["sunrise", "nordic"].includes(item.id)) score += 7;
+        if (/prijsbewust|standaard/.test(text) && item.id === "editions") score += 8;
+        if (/diepe waskom/.test(text) && item.id === "dawn") score += 8;
+        if (/opbouwkom/.test(text) && item.id === "opbouw") score += 9;
+        if (/stoer industrieel|beton|cerablad/.test(text) && ["coast", "ledge"].includes(item.id)) score += 6;
+        if (/51 cm/.test(text) && item.id === "nordic") score += 8;
+        if (/rond 46 cm/.test(text) && ["blend", "coast", "level", "dawn", "dusk", "sunrise", "ledge"].includes(item.id)) score += 2;
+
+        return { ...item, score };
+      });
+
+      return scores.sort((a, b) => b.score - a.score);
+    }
+
+    function adviceDetails(primary) {
+      const text = answerText();
+      const lines = [];
+      if (/klein|smal|toilet|compact|tot 60|ondiep/.test(text)) {
+        lines.push("Let extra op diepte en loopruimte. Een 40 cm diepe oplossing of compact meubel voorkomt dat de badkamer vol aanvoelt.");
+      }
+      if (/140|breder|ruim/.test(text)) {
+        lines.push("Bij een brede wand kun je denken aan een brede lade-indeling, dubbele wastafel of symmetrische opstelling.");
+      }
+      if (/maximaal|hoge kast|spiegelkast/.test(text)) {
+        lines.push("Combineer de wastafelkast met een hoge kast of spiegelkast voor voorraad en dagelijkse spullen.");
+      }
+      if (/kleur|persoonlijk/.test(text)) {
+        lines.push("Neem kleurstalen mee in het adviesgesprek; frontkleur en bladkleur bepalen samen de sfeer.");
+      }
+      if (/nog niet gemeten/.test(text)) {
+        lines.push("Meet voor het dealerbezoek de beschikbare breedte, diepte, afvoerpositie en kraanpositie.");
+      }
+      if (primary.id === "made") {
+        lines.push("Vraag de dealer specifiek naar de vijf dieptematen en de bladmaterialen, omdat daar de meeste ontwerpvrijheid zit.");
+      }
+      return lines;
+    }
+
+    function showAdvice() {
+      const ranked = rankSeries();
+      const [primary, secondary, tertiary] = ranked;
+      const details = adviceDetails(primary);
+      state.lastAdvice = {
+        primary: primary.name,
+        secondary: secondary.name,
+        tertiary: tertiary.name,
+        summary: primary.advice,
+        answers: { ...state.answers }
+      };
+
+      addMessage(
+        `Mijn hoofdadvies: ${primary.name}.\n\n${primary.advice}\n\nGoede alternatieven:\n1. ${secondary.name}: ${secondary.summary}\n2. ${tertiary.name}: ${tertiary.summary}\n\nProductadvies:\n${details.map(line => `- ${line}`).join("\n")}\n\nNeem dit mee naar de Primabad dealer: gewenste breedte, maximale diepte, bladvoorkeur, frontkleur, opbergwens en foto's van de badkamer. De dealer controleert actuele mogelijkheden, prijs en montage.`
+      );
+      updateLeadSummary();
+      addChips(["Maak dealer aanvraag", "Ik wil compacter", "Ik wil luxer", "Meer maatwerk", "Opnieuw starten"], handleFollowUp);
+    }
+
+    function handleFollowUp(answer) {
+      clearChips();
+      addMessage(answer, "user");
+      const lower = answer.toLowerCase();
+      if (/opnieuw/.test(lower)) {
+        restart();
+        return;
+      }
+      if (/aanvraag/.test(lower)) {
+        document.querySelector("#lead").scrollIntoView({ behavior: "smooth" });
+        addMessage("Ik heb de aanvraagtekst alvast voorbereid onderaan de pagina. Vul daar je contactgegevens en eventuele maten in.");
+      } else if (/compacter/.test(lower)) {
+        addMessage("Compactere route: vergelijk Get Up, Made NL in ondiepe diepte en eventueel toiletmeubelen. Houd de wastafel enkel, kies lades met slimme indeling en gebruik een spiegelkast voor extra bergruimte.");
+      } else if (/luxer/.test(lower)) {
+        addMessage("Luxere route: vergelijk Blend, Coast, Level en Sunrise. Combineer een rustig front met keramiek, solid surface of cerablad, voeg een brede verlichte spiegel toe en stem hoge kasten af op de frontkleur.");
+      } else if (/maatwerk/.test(lower)) {
+        addMessage("Maatwerkroute: Made NL is de eerste kandidaat. Bespreek exacte breedte, dieptemaat, bladmateriaal, kastvarianten, kleur en of een dubbele wastafel nodig is.");
+      }
+      addChips(["Maak dealer aanvraag", "Ik wil compacter", "Ik wil luxer", "Meer maatwerk", "Opnieuw starten"], handleFollowUp);
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      if (state.step < questions.length) {
+        handleAnswer(value);
+      } else {
+        handleFollowUp(value);
+      }
+      input.value = "";
+    });
+
+    reset.addEventListener("click", restart);
+
+    function restart() {
+      clearChips();
+      state.step = 0;
+      state.answers = {};
+      state.lastAdvice = null;
+      messages.innerHTML = "";
+      addMessage("Welkom. Ik help je kiezen tussen Primabad-series en vertaal je wensen naar een concreet startadvies voor de dealer.");
+      askCurrentQuestion();
+      updateLeadSummary();
+    }
+
+    function buildLeadText() {
+      const name = document.querySelector("#name").value || "[naam]";
+      const postcode = document.querySelector("#postcode").value || "[postcode]";
+      const email = document.querySelector("#email").value || "[e-mail]";
+      const phone = document.querySelector("#phone").value || "[telefoon]";
+      const timeline = document.querySelector("#timeline").value || "[planning]";
+      const remarks = document.querySelector("#remarks").value || "[aanvullende wensen]";
+      const advice = state.lastAdvice;
+
+      return `Aanvraag Primabad badmeubeladvies
+
+Naam: ${name}
+Postcode: ${postcode}
+E-mail: ${email}
+Telefoon: ${phone}
+Planning: ${timeline}
+
+Adviesmodule uitkomst:
+Hoofdadvies: ${advice ? advice.primary : "[nog geen advies ingevuld]"}
+Alternatieven: ${advice ? `${advice.secondary}, ${advice.tertiary}` : "[nog geen advies ingevuld]"}
+Samenvatting: ${advice ? advice.summary : "[doorloop eerst de keuzehulp]"}
+
+Wensen uit keuzehulp:
+Ruimte: ${state.answers.room || "-"}
+Breedte: ${state.answers.width || "-"}
+Diepte: ${state.answers.depth || "-"}
+Stijl: ${state.answers.style || "-"}
+Wastafel/blad: ${state.answers.basin || "-"}
+Opbergruimte: ${state.answers.storage || "-"}
+Maatwerk: ${state.answers.custom || "-"}
+Budgetrichting: ${state.answers.budget || "-"}
+
+Aanvullend:
+${remarks}`;
+    }
+
+    function updateLeadSummary() {
+      const text = buildLeadText();
+      leadSummary.textContent = text;
+      const subject = encodeURIComponent("Aanvraag Primabad badmeubeladvies");
+      const body = encodeURIComponent(text);
+      mailLink.href = `mailto:?subject=${subject}&body=${body}`;
+    }
+
+    leadForm.addEventListener("submit", event => {
+      event.preventDefault();
+      updateLeadSummary();
+      mailLink.style.display = "inline-flex";
+      leadSummary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    ["name", "postcode", "email", "phone", "timeline", "remarks"].forEach(id => {
+      document.querySelector(`#${id}`).addEventListener("input", updateLeadSummary);
+    });
+
+    copyEmbed.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(embedCode.value);
+        copyStatus.textContent = "Embed-code gekopieerd.";
+      } catch {
+        embedCode.select();
+        copyStatus.textContent = "Selecteer de code en kopieer deze handmatig.";
+      }
+    });
+
+    renderSeriesCards();
+    restart();
+  </script>
+</body>
+</html>

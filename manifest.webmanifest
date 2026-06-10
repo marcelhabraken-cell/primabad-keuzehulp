@@ -1,0 +1,62 @@
+{
+  "name": "Primabad Badmeubel Advies",
+  "short_name": "Primabad Advies",
+  "description": "Adviesmodule voor consumenten die een Primabad badmeubel willen kiezen.",
+  "lang": "nl-NL",
+  "dir": "ltr",
+  "start_url": "./primabad-chatbot.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f5ef",
+  "theme_color": "#3e5143",
+  "categories": ["shopping", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start advies",
+      "short_name": "Advies",
+      "description": "Open direct de Primabad keuzehulp.",
+      "url": "./primabad-chatbot.html#advies",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Dealer aanvraag",
+      "short_name": "Aanvraag",
+      "description": "Open het aanvraagformulier.",
+      "url": "./primabad-chatbot.html#lead",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
